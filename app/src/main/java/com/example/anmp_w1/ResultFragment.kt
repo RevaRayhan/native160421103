@@ -6,29 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.example.anmp_w1.databinding.FragmentMainBinding
+import com.example.anmp_w1.databinding.FragmentResultBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MainFragment : Fragment() {
-    private lateinit var binding:FragmentMainBinding
+class ResultFragment : Fragment() {
+    private lateinit var binding:FragmentResultBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        binding = FragmentResultBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnStart.setOnClickListener {
-            var playerName = ""
-            playerName = binding.txtName.text.toString()
-            val action = MainFragmentDirections.actionMainFragmentToGameFragment(playerName)
+
+        if (arguments != null) {
+            var score = ResultFragmentArgs.fromBundle(requireArguments()).score
+            binding.txtScore.text = "Your score is $score"
+        }
+
+        binding.btnBackToMain.setOnClickListener {
+            val action = ResultFragmentDirections.actionResultFragmentToMainFragment()
             Navigation.findNavController(it).navigate(action)
         }
     }

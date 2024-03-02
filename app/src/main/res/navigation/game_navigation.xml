@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_navigation"
-    app:startDestination="@id/gameFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -19,11 +19,23 @@
         android:name="com.example.anmp_w1.GameFragment"
         android:label="Game Screen"
         tools:layout="@layout/fragment_game">
-        <action
-            android:id="@+id/action_gameFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
         <argument
             android:name="player_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_gameFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.anmp_w1.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
     </fragment>
 </navigation>
